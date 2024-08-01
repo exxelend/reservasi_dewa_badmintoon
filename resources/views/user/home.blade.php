@@ -12,10 +12,10 @@
                             lapangan bulutangkis dengan kami untuk pengalaman bermain yang intens dan penuh prestasi.
                             Bergabunglah dengan komunitas pemenang, taklukkan lapangan, dan rasakan kemenangan Anda.</p>
                     </div>
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <img class="img-fluid animated pulse infinite" src="{{ asset('assets/img/orang.png') }}"
                             alt="">
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                     <div class="contact-info-item position-relative bg-primary text-center p-3">
                         <div class="border py-5 px-3">
                             <i class="fa fa-check fa-3x text-dark mb-4"></i>
-                            <h5 class="text-white">Pelatih yang profesional di bidang badminton</h5>
+                            <h5 class="text-white">Sistem penyewaan lapangan berupa website</h5>
                         </div>
                     </div>
                 </div>

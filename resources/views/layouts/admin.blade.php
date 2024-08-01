@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DewaBadmintoonHall</title>
+    <title>DewaBadmintonHall</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -73,12 +73,9 @@
                     <a href="/lapangan" class="nav-item nav-link {{ ($currentPath == 'lapangan') ? 'active' : '' }}">
                         <i class="fas fa-table me-2"></i>Lapangan
                     </a>
-                    <a href="/pelatih" class="nav-item nav-link {{ ($currentPath == 'pelatih') ? 'active' : '' }}">
-                        <i class="fas fa-chalkboard-teacher me-2"></i>Pelatih
-                    </a>
-                    <a href="/admin/member" class="nav-item nav-link {{ ($currentPath == 'admin/member') ? 'active' : '' }}">
+                    <!-- <a href="/admin/member" class="nav-item nav-link {{ ($currentPath == 'admin/member') ? 'active' : '' }}">
                         <i class="fas fa-users me-2"></i>Member
-                    </a>
+                    </a> -->
                    
                     <a href="/admin/pemesanan" class="nav-item nav-link {{ ($currentPath == 'admin/pemesanan') ? 'active' : '' }}">
                         <i class="fas fa-calendar-check me-2"></i>Reservasi

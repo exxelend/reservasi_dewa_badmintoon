@@ -155,10 +155,12 @@ img.animated.pulse {
   top: 0;
   left: 0;
   background-image: url('http://127.0.0.1:8000/assets/img/bg1.jpg');
+  background-color: #4b60ff5e;
   background-size: cover;
   /* background: rgba(255, 255, 255, .1);
   clip-path: polygon(66% 0, 100% 0, 100% 100%, 33% 100%); */
 }
+
 
 .hero-header .container {
   position: relative;
@@ -192,11 +194,11 @@ img.animated.pulse {
 /*** Deal ***/
 .deal {
   position: relative;
-  background: url(public/assets/img/bg1.jpg) center/cover no-repeat;
+  background: url(public/assets/img/bg9.jpg) center/cover no-repeat;
   background-size: cover;
 }
 
-.deal::before {
+.deal::before { 
   position: absolute;
   content: "";
   width: 100%;
@@ -347,13 +349,13 @@ img.animated.pulse {
   height: 100%;
   top: 0;
   left: 0;
-  background: url(public/assets/img/bg1.jpg) center/cover no-repeat;
+  background: url(public/assets/img/bg9.jpg) center/cover no-repeat;
   clip-path: polygon(66% 0, 100% 0, 100% 100%, 33% 100%);
 }
 
 .contact-info-item .border {
   position: relative;
-  background: url(public/assets/img/bg1.jpg) center/cover no-repeat;
+  background: url(public/assets/img/bg9.jpg) center/cover no-repeat;
   z-index: 1;
 }
 

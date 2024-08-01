@@ -20,8 +20,7 @@ class PemesananController extends Controller
             'date_field_to' => 'waktu_akhir',
             'field'      => 'user_id',
             'nama_lapangan'      => 'lapangan_id',
-            'prefix'     => '',
-            'suffix'     => '',
+          
         ],
     ];
 
@@ -29,6 +28,7 @@ class PemesananController extends Controller
 
         $pemesanan = [];
         $lapanganList = Lapangan::all();
+        
 
         foreach ($this->sources as $source) {
                 $models = $source['model']::where('status', 'Sukses')->get();
@@ -38,7 +38,7 @@ class PemesananController extends Controller
                 $crudFieldValueTo = $model->getOriginal($source['date_field_to']);
                 $lapangan = Lapangan::findOrFail($model->getOriginal($source['nama_lapangan']));
                 $userName = $model->getOriginal('nama');
-                $timeBreak = \Carbon\Carbon::parse($crudFieldValueTo)->format('H:i');
+                
 
 
                 if (!$crudFieldValue && $crudFieldValueTo) {
@@ -46,8 +46,7 @@ class PemesananController extends Controller
                 }
                     
                 $pemesanan[] = [
-                    'title' => trim($source['prefix'] . "($lapangan->nama_lapangan)" . $userName
-                        . " " ). " " . $timeBreak,
+                    'title' =>  "$lapangan->nama_lapangan\n".  $userName,
                     'start' => $crudFieldValue,
                     'end' => $crudFieldValueTo,
                 ];

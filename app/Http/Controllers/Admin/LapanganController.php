@@ -26,7 +26,7 @@ class LapanganController extends Controller
     {
         $data = $request->validate([
             'nama_lapangan' => 'required',
-            'harga' => 'required|numeric',
+            'harga' => 'required|numeric|min:1',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
@@ -49,7 +49,7 @@ class LapanganController extends Controller
         $lapangan = Lapangan::find($id);
         $data = $request->validate([
             'nama_lapangan' => 'required',
-            'harga' => 'required|numeric'
+            'harga' => 'required|numeric|min:1',
         ]);
 
         if ($request->hasFile('gambar')) {

@@ -15,4 +15,8 @@ class Pemesanan extends Model
     {
         return $this->belongsTo(Lapangan::class, 'lapangan_id');
     }
+    public static function getTotalPemesanan()
+    {
+        return self::count(); // Misalnya, menghitung jumlah total pemesanan
+    }
 }

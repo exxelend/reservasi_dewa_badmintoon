@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request; // Menggunakan Illuminate\Http\Request untuk mengakses Request
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -23,22 +23,33 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
+     * Handle an authentication attempt.
      *
-     * @var string
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    protected function redirectTo()
+    public function authenticating(Request $request)
     {
-        $user = Auth::user();
+        $credentials = $request->only('email', 'password');
 
-        if ($user->role === 'admin') {
-            return route('dashboard_admin');
-        } elseif ($user->role === 'user') {
-            return route('dashboard');
+        if (Auth::attempt($credentials)) {
+            $user_role = Auth::user()->role;
+            if ($user_role == 'admin') {
+                return redirect()->route('dashboard_admin');
+            } else if ($user_role == 'user') {
+                return redirect()->route('dashboard');
+            } else if ($user_role == 'owner') {
+                return redirect()->route('owner.dashboard');
+            } else if ($user_role == 'petugas') {
+                return redirect()->route('petugas.dashboard');
+            } else if ($user_role == 'kasir') {
+                return redirect()->route('kasir.dashboard');
+            } else {
+                return redirect()->route('home'); // Atur route default sesuai kebutuhan Anda
+            }
         }
 
-        // Default redirect jika peran tidak cocok
-        return route('home');
+        return redirect()->back()->withInput($request->only('email')); // Redirect kembali dengan input email jika login gagal
     }
 
     /**

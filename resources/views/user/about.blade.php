@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-fluid bg-primary hero-header mb-5">
         <div class="container text-center">
-            <h1 class="display-4 text-white mb-3 animated slideInDown">Tentang Kami</h1>
+            <h1 class="display-10 text-white mb-3 animated slideInDown">Tentang Kami</h1>
         </div>
     </div>
 
@@ -23,22 +23,24 @@
 
     <div class="container-fluid py-5">
         <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+            <div class="row g-5">
+                <div class="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
                     <div class="contact-info-item position-relative bg-primary text-center p-3">
                         <div class="border py-5 px-3">
                             <i class="fa fa-map-marker-alt fa-3x text-dark mb-4"></i>
                             <h5 class="text-white">Address</h5>
-                            <h5 class="fw-light text-white">Jl. Perdagangan</h5>
+                            <h5 class="fw-light text-white">Jl. Perdagangan, Banjarmasin</h5>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
+                <div class="col-lg-3 wow fadeIn" data-wow-delay="0.3s">
                     <div class="contact-info-item position-relative bg-primary text-center p-3">
                         <div class="border py-5 px-3">
                             <i class="fa fa-phone-alt fa-3x text-dark mb-4"></i>
                             <h5 class="text-white">Call Us</h5>
-                            <h5 class="fw-light text-white">+62878 4214 0196</h5>
+                            <h5 class="fw-light text-white">
+                                <a href="https://wa.me/6287842140196" class="text-white" target="_blank">+62878 4214 0196</a>
+                            </h5>
                         </div>
                     </div>
                 </div>
@@ -48,7 +50,7 @@
                             <i class="fab fa-instagram fa-3x text-dark mb-4"></i>
                             <h5 class="text-white">Instagram</h5>
                             <h5 class="fw-light text-white">
-                                <a href="https://www.instagram.com/dewabadmintoon" class="text-white" target="_blank">@dewabadmintoon</a>
+                                <a href="https://www.instagram.com/dewabadminton?igsh=MWh4b2NjNDRiN3Fiag==" class="text-white" target="_blank">@dewabadmintoon</a>
                             </h5>
                         </div>
                     </div>

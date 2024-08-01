@@ -49,13 +49,15 @@
 
                         @if (Route::has('password.request'))
                             <p class="text-center">
-                                <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                                <!-- <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a> -->
+                                <a href="{{ route('google.login') }}" class="btn btn-primary"> Login with Google</a>
+                                <!-- <a href="{{ url('auth/google') }}" class="btn btn-primary"> Login with Google</a> -->
                             </p>
                         @endif
 
-                        <p class="text-center">
+                        <!-- <p class="text-center">
                             {{ __("Don't have an account?") }} <a href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </p>
+                        </p> -->
                     </form>
                 </div>
             </div>

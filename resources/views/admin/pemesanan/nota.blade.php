@@ -47,18 +47,18 @@
 </head>
 
 <body onload="window.print()">
-    <button class="btn-print" style="position: absolute; right: 1rem; top: rem;" onclick="window.print()">Print</button>
+    <button class="btn-print" style="position: absolute; right: 1rem; top: 1rem;" onclick="window.print()">Print</button>
     <div class="text-center">
-        <h3 style="margin-bottom: 5px;">Bencoolen Badminton</h3>
-        <p>Jalan Meranti No.Raya Sawah Lebar Bengkulu 38221 Indonesia</p>
+        <h3 style="margin-bottom: 5px;">Dewa Badminton</h3>
+        <p>Jl. Perdagangan, Alalak Utara, Banjarmasin Utara, Kalimantan Selatan 70124</p>
     </div>
     <br>
     <div>
         <p style="float: left;">{{ $pemesanan->tgl_pemesanan }}</p>
-        <p style="float: right">{{ $pemesanan->nama }}</p>
+        <p style="float: right;">{{ $pemesanan->nama }}</p>
     </div>
-    <div class="clear-both" style="clear: both;"></div>
-    <p>No: 000{{ $pemesanan->id, 10  }}</p>
+    <div class="clearfix"></div>
+    <p>No: 000{{ str_pad($pemesanan->id, 10, '0', STR_PAD_LEFT) }}</p>
     <p class="text-right">===================================</p>
 
     <br>
@@ -96,11 +96,11 @@
         </tr>
         <tr>
             <td>Kembali:</td>
-            <td class="text-right">Rp{{ number_format($pemesanan->total_harga - $pemesanan->total_harga) }}</td>
+            <td class="text-right">Rp{{ number_format(0, 2, ',', '.') }}</td>
         </tr>
     </table>
 
-    <p class="text-rigth">===================================</p>
+    <p class="text-right">===================================</p>
     <p class="text-center">-- TERIMA KASIH --</p>
 
     <script>

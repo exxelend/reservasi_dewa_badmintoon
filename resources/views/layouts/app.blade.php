@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>BencoolenBadminton</title>
+    <title>DewaBadmintonHall</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -24,11 +24,11 @@
     <link href="{{ asset('css/style.css') }} "rel="stylesheet">
 </head>
 
-<body style="background-image: url('http://127.0.0.1:8000/assets/img/bg1.jpg')">
+<body style="background-image: url('/assets/img/bg7.jpg'); background-size: cover; background-position: center;">
     <div class="container-fluid sticky-top">
         <nav class="navbar navbar-expand-lg navbar-light p-0">
             <div class="container">
-
+                <!-- Isi navigasi di sini -->
             </div>
         </nav>
     </div>
@@ -44,5 +44,6 @@
     <!-- Template Javascript -->
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
+
 
 </html>

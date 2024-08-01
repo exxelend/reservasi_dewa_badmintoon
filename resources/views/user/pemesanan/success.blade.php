@@ -20,8 +20,8 @@
             @foreach ($pemesanans as $pemesanan)
             <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 900px;">
                 <h1 class="text-primary mb-3"><span class="fw-light text-dark">Total Pembayaran:</span> Rp{{number_format($pemesanan->total_harga,2,',','.') }}</h1>
-                <p class="mb-5">Silakan lakukan pembayaran ke nomor rekening berikut untuk menyelesaikan proses transaksi Anda: (Nomor Rekening). <br> Pastikan untuk mengirimkan bukti pembayaran ke kontak dibawah ini. Terimakasih atas kerjasama Anda."</p>
-                <a href=" https://api.whatsapp.com/send?phone=6281234567090&text=Nama,nomer lapangan berikut bukti pembayaran" class="btn btn-success btn-block">{{ __('Kirim bukti perbayaran') }}</a>
+                <p class="mb-5">Silakan lakukan pembayaran ke nomor rekening berikut untuk menyelesaikan proses transaksi Anda. <br> 310013210599 (Bank Mandiri) a/n ADITYATAMA WAHYU SHO <br> Pastikan untuk mengirimkan bukti pembayaran ke kontak dibawah ini. Terimakasih atas kerjasama Anda.</p>
+                <a href=" https://api.whatsapp.com/send?phone=6282155307938&text=Ketik : Nama=........nomer lapangan=......... berikutnya kirim bukti pembayaran" class="btn btn-success btn-block">{{ __('Kirim bukti perbayaran') }}</a>
             </div>
             @endforeach
         </div>

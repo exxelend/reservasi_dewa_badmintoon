@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid bg-primary hero-header mb-5">
     <div class="container text-center">
-        <h1 class="display-4 text-white mb-3 animated slideInDown">Reservasi</h1>
+        <h1 class="display-9 text-white mb-3 animated slideInDown">Reservasi</h1>
     </div>
 </div>
 <div class="container-fluid py-5">
@@ -10,6 +10,7 @@
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
             <h2 class="text-primary mb-3"><span class="fw-light text-dark">Reservasi Lapangan</span> dengan Mudah</h2>
             <p class="mb-5">Nikmati keseruan bermain badminton dengan fasilitas lapangan terbaik</p>
+            <p class="mb-5">Usahakan datang tepat waktu</p>
         </div>
         <div class="row g-4">
             @foreach($lapanganList as $lapangan)  
@@ -46,39 +47,41 @@
         </div>
     </div>
 </div>
-    
 <div class="container-fluid py-5">
-<div class="container">
-    <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
-        <h2 class="text-primary mb-3"><span class="fw-light text-dark">Jadwal</span> Reservasi Lapangan</h2>
-    </div>
-    <br>    
-    <div class="card">
-        <div class="card-body">
-            <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
-
-            <div id='calendar'></div>
+    <div class="container">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h2 class="text-primary mb-3"><span class="fw-light text-dark">Jadwal</span> Reservasi Lapangan</h2>
+        </div>
+        <br>    
+        <div class="card">
+            <div class="card-body">
+                <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
+                <div id='calendar'></div>
+            </div>
         </div>
     </div>
 </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 <script>
 $(document).ready(function () {
-    // page is now ready, initialize the calendar...
-   
-    pemesanan={!! json_encode($pemesanan) !!};
+    // Pastikan $pemesanan diinisialisasi dan diencode dengan json_encode di PHP
+    var pemesanan = <?php echo json_encode($pemesanan); ?>;
 
-    console.log(pemesanan)
+    // Menginisialisasi kalender menggunakan FullCalendar
     $('#calendar').fullCalendar({
-        
-        events: pemesanan
-
-
+        header: {
+          
+        },
+        events: pemesanan, // Menambahkan data reservasi ke dalam kalender
+        displayEventTime: false,
+        eventRender: function(event, element) {
+            var formattedTitle = event.title.replace(/\n/g, '<br>');
+            // Menambahkan waktu mulai dan akhir ke dalam judul event pada kalender
+            element.find('.fc-title').append('<br/>Start: ' + event.start.format('HH:mm') + '<br/>End: ' + event.end.format('HH:mm'));
+        }
     });
 });
 </script>

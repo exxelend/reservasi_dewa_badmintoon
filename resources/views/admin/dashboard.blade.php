@@ -7,16 +7,14 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fas fa-users fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <h4 class="mb-2">Member</h4>
-                            <h6 class="mb-0">{{ $totalMember }}</h6>
+                            <h4 class="mb-2">Reservasi</h4>
+                            <h6 class="mb-0">{{ $totalPemesanan }}</h6>
                         </div>
                     </div>
                 </div>
-        
                 </div>
-                
                 </div>
             </div>
-        </div>
-    </div>
+       </div>
+     </div>
 @endsection
