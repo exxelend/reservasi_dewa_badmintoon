@@ -65,10 +65,10 @@
                 $currentPath = Request::path();
                 @endphp
                 <div class="navbar-nav w-100">
-                    <a href="/petugas-dashboard"
+                    <!-- <a href="/petugas-dashboard"
                         class="nav-item nav-link {{ ($currentPath == 'petugas-dashboard') ? 'active' : '' }}">
                         <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                    </a>
+                    </a> -->
                     <!-- <a href="/lapangan" class="nav-item nav-link {{ ($currentPath == 'lapangan') ? 'active' : '' }}">
                         <i class="fas fa-table me-2"></i>Lapangan
                     </a> -->

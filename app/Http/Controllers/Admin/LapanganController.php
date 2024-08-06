@@ -12,7 +12,7 @@ class LapanganController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $lapangan = Lapangan::where('nama_lapangan', 'LIKE', '%'.$request->search.'%')->paginate(5);
+            $lapangan = Lapangan::where('nama_lapangan', 'LIKE', '%' . $request->search . '%')->paginate(5);
         } else {
             $lapangan = Lapangan::all();
         }
@@ -44,6 +44,7 @@ class LapanganController extends Controller
         $lapangan = Lapangan::find($id);
         return view('admin.lapangan.update', compact(['lapangan']));
     }
+
     public function edit($id, Request $request)
     {
         $lapangan = Lapangan::find($id);
@@ -51,26 +52,31 @@ class LapanganController extends Controller
             'nama_lapangan' => 'required',
             'harga' => 'required|numeric|min:1',
         ]);
-
+    
+        // Update data umum
+        $lapangan->update($data);
+    
         if ($request->hasFile('gambar')) {
             $request->validate([
-                'gambar' => '|image|mimes:jpeg,jpg,png'
+                'gambar' => 'image|mimes:jpeg,jpg,png'
             ]);
+    
             $gambar_file = $request->file('gambar');
             $gambar_nama = time() . '_' . $gambar_file->getClientOriginalName();
             $gambar_file->move(public_path('Gambar Lapangan'), $gambar_nama);
-
+    
+            // Hapus gambar lama jika ada
             $namaGambar = $lapangan->gambar;
             $pathGambar = public_path('Gambar Lapangan/') . $namaGambar;
-            if (file_exists($pathGambar)) {
+            if (file_exists($pathGambar) && $namaGambar) {
                 unlink($pathGambar);
             }
-            $data['gambar'] = $gambar_nama;
-
-            $lapangan->update($data);
-            
-            return redirect('/lapangan')->with('success', 'Lapangan berhasil diperbarui');
+    
+            // Simpan nama gambar baru ke database
+            $lapangan->update(['gambar' => $gambar_nama]);
         }
+    
+        return redirect('/lapangan')->with('success', 'Lapangan berhasil diperbarui');
     }
 
     public function delete($id)

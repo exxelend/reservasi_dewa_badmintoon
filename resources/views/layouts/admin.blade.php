@@ -63,6 +63,7 @@
                         <span>Admin</span>
                     </div>
                 </div>
+                
                 @php
                 $currentPath = Request::path();
                 @endphp
@@ -73,10 +74,9 @@
                     <a href="/lapangan" class="nav-item nav-link {{ ($currentPath == 'lapangan') ? 'active' : '' }}">
                         <i class="fas fa-table me-2"></i>Lapangan
                     </a>
-                    <!-- <a href="/admin/member" class="nav-item nav-link {{ ($currentPath == 'admin/member') ? 'active' : '' }}">
-                        <i class="fas fa-users me-2"></i>Member
-                    </a> -->
-                   
+                    <a href="/admin/users   " class="nav-item nav-link {{ ($currentPath == 'admin/users') ? 'active' : '' }}">
+                        <i class="fas fa-users me-2"></i>Manage Users
+                    </a>
                     <a href="/admin/pemesanan" class="nav-item nav-link {{ ($currentPath == 'admin/pemesanan') ? 'active' : '' }}">
                         <i class="fas fa-calendar-check me-2"></i>Reservasi
                     </a>
@@ -92,10 +92,7 @@
         <!-- Content Start -->
         <div class="content">
             <!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                </a>
+            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-3 py-0">
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
@@ -115,9 +112,10 @@
                                 </form>
                             </div>
                         </li>
-                        @endauth
+                    @endauth
                 </div>
             </nav>
+            
             <!-- Navbar End -->
             
             @yield('content')
@@ -130,13 +128,13 @@
                         </div>
                     </div>
             </div>
-            <!-- Footer End -->
+            <!-- Footer End -->
         </div>
         <!-- Content End -->
 
 
         <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <a href="" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     <script>
@@ -159,7 +157,6 @@
     <script src=" {{ asset('admin/lib/tempusdominus/js/moment.min.js')}} "></script>
     <script src=" {{ asset('admin/lib/tempusdominus/js/moment-timezone.min.js')}} "></script>
     <script src=" {{ asset('admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}} "></script>
-
 
     <!-- Template Javascript -->
     <script src=" {{ asset('admin/js/main.js')}} "></script>

@@ -5,8 +5,15 @@
         <h1 class="display-4 text-white mb-3 animated slideInDown">Reservasi</h1>
     </div>
 </div>
-
 <div class="container my-5">
+    @if (session()->has('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-message">
+        {{ session()->get('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     @if (session()->has('message'))
     <div class="alert alert-{{ session()->get('alert-type') }} alert-dismissible fade show" role="alert" id="alert-message">
         {{ session()->get('message') }}
@@ -27,7 +34,7 @@
                             <div class="col-sm-9">
                                 <select name="lapangan_id" id="lapangan_id" class="form-control">
                                     @foreach ($lapangan as $item)
-                                    <option {{ $nama_lapangan == $item->nama_lapangan ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->nama_lapangan }}</option>
+                                    <option {{ old('lapangan_id') == $item->id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->nama_lapangan }}</option>
                                     @endforeach
                                 </select>
 
@@ -42,7 +49,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label" for="no_hp">{{ __('Nomor Handphone') }}</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="no_hp" name="no_hp" pattern="[0-9]{=<14}" title="Masukkan tepat 14 digit angka" required />
+                                <input type="text" class="form-control" id="no_hp" name="no_hp" pattern="[0-9]{10,14}" title="Masukkan antara 10 hingga 14 digit angka" required />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -67,24 +74,19 @@
 <script>
     document.getElementById('no_hp').addEventListener('input', function() {
         var value = this.value.replace(/\D/g, ''); // Hapus karakter non-digit
-        if (value.length > 12) {
-            this.value = value.slice(0, 14); // Potong ke 12 karakter pertama
+        if (value.length > 14) {
+            this.value = value.slice(0, 14); // Potong ke 14 karakter pertama
             document.getElementById('error-msg').innerText = 'Nomor Handphone harus tepat 14 digit';
         } else {
             document.getElementById('error-msg').innerText = '';
         }
     });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script>
     $('.datetimepicker').datetimepicker({
         format: 'YYYY-MM-DD HH:00',

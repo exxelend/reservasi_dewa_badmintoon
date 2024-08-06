@@ -69,4 +69,10 @@ class Kernel extends HttpKernel
         'petugas' => \App\Http\Middleware\PetugasMiddleware::class,
         'kasir' => \App\Http\Middleware\KasirMiddleware::class,
     ];
+    protected $routeMiddleware = [
+        // Other middleware
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+    ];
+    
+    
 }

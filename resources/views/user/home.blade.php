@@ -6,8 +6,8 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 text-center text-lg-start">
                         <h1 class="display-4 text-white animated slideInRight">Dewa <span
-                                class="fw-light text-dark">Badminton Hall</span></h1><br>
-                        <h5 class="text-dark animated slideInRight">Smash and Drop, Menuju Puncak Prestasi! </h5>
+                                class="fw-light text-white">Badminton Hall</span></h1><br>
+                        <h5 class="text-white animated slideInRight">Smash and Drop, Menuju Puncak Prestasi! </h5>
                         <p class="text-white mb-4 animated slideInRight">Selamat datang di tempatnya para juara! Reservasi
                             lapangan bulutangkis dengan kami untuk pengalaman bermain yang intens dan penuh prestasi.
                             Bergabunglah dengan komunitas pemenang, taklukkan lapangan, dan rasakan kemenangan Anda.</p>
@@ -65,6 +65,7 @@
                         lingkungan yang mendukung, memotivasi, dan memperkaya pengalaman setiap pemain. Dengan fasilitas
                         yang modern, tim kami yang berdedikasi, dan program-program unggulan, kami berusaha menjadi
                         destinasi utama bagi pecinta bulutangkis.</p>
+                        <p class="mb-4">Alamat : Jl. Perdagangan Komplek Gilang Persada RT. 02, RW. 02 No. 89 Banjarmasin Utara 70124, Kalimantan Selatan, Indonesia.  </p>
                     @auth
                         <a href="/pemesanan/create" class="btn btn-outline-primary px-3">Reservasi Sekarang</a>
                     @else

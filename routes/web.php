@@ -17,6 +17,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\KasirController;
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,9 +53,11 @@ Route::get('/events/{event}', [\App\Http\Controllers\Auth\EventController::class
 Route::middleware(['auth', 'role:owner'])->group(function () {Route::get('/owner-dashboard', [OwnerController::class, 'index'])->middleware('owner')->name('owner.dashboard');});
 Route::get('/owner-dashboard', [OwnerController::class, 'index'])->middleware('owner')->name('owner.dashboard');
 
+
 Route::middleware(['auth', 'role:petugas'])->group(function () {
     Route::get('/petugas-dashboard', [PetugasController::class, 'index'])->middleware('petugas')->name('petugas.dashboard');
     Route::get('/petugas/pemesanan', [PetugasController::class, 'reservasi'])->name('petugas.index');
+    
 });
 
 Route::middleware(['auth', 'role:kasir'])->group(function () {
@@ -72,13 +75,19 @@ Route::get('/dashboard_admin', [HomeController::class, 'index'])->name('dashboar
 Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::get('/dashboard_admin', [DashboardController::class, 'index'])->name('dashboard_admin');
 
+// routes/web.php
+Route::put('/admin/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])
+    ->name('admin.users.update')
+    ->middleware('role:admin');
+
+
 
 // Rute untuk bagian SEO
 // Contoh penggunaan routing yang bersih di Laravel
 Route::get('/artikel/{slug}', 'ArtikelController@show');
 
 
-    Route::get('/lapangan', [\App\Http\Controllers\Admin\LapanganController::class, 'index'])->name('lapangan.index')->middleware('role:admin');
+    Route::get('/lapangan', )->name('lapangan.index')->middleware('role:admin');
     Route::get('/lapangan/create', [\App\Http\Controllers\Admin\LapanganController::class, 'create'])->middleware('role:admin');
     Route::post('/lapangan/store', [\App\Http\Controllers\Admin\LapanganController::class,'store'])->middleware('role:admin');
     Route::get('/lapangan/{id}/update', [\App\Http\Controllers\Admin\LapanganController::class, 'update'])->middleware('role:admin');
