@@ -73,4 +73,9 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <h3 class="mb-4"></h3>
+        <a href="{{ route('events.create') }}" class="btn btn-primary mb-3">Kelola Event</a>
+        <!-- Konten lainnya -->
+    </div>
 @endsection

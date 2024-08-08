@@ -74,7 +74,7 @@
                     <a href="/lapangan" class="nav-item nav-link {{ ($currentPath == 'lapangan') ? 'active' : '' }}">
                         <i class="fas fa-table me-2"></i>Lapangan
                     </a>
-                    <a href="/admin/users   " class="nav-item nav-link {{ ($currentPath == 'admin/users') ? 'active' : '' }}">
+                    <a href="/admin/users" class="nav-item nav-link {{ ($currentPath == 'admin/users') ? 'active' : '' }}">
                         <i class="fas fa-users me-2"></i>Manage Users
                     </a>
                     <a href="/admin/pemesanan" class="nav-item nav-link {{ ($currentPath == 'admin/pemesanan') ? 'active' : '' }}">
@@ -132,7 +132,8 @@
         </div>
         <!-- Content End -->
 
-
+        <!-- Chart -->  
+            
         <!-- Back to Top -->
         <a href="" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
@@ -157,7 +158,7 @@
     <script src=" {{ asset('admin/lib/tempusdominus/js/moment.min.js')}} "></script>
     <script src=" {{ asset('admin/lib/tempusdominus/js/moment-timezone.min.js')}} "></script>
     <script src=" {{ asset('admin/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}} "></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Template Javascript -->
     <script src=" {{ asset('admin/js/main.js')}} "></script>
 </body>

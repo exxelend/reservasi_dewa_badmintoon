@@ -1,8 +1,9 @@
 @extends('layouts.user')
 @section('content')
+<!-- style="background-color:black;" -->
     <div class="container-fluid bg-primary hero-header mb-5">
         <div class="container text-center">
-            <h1 class="display-10 text-white mb-3 animated slideInDown">Tentang Kami</h1>
+            <h1 class="display-10 text-white mb-3 animated slideInDown">Tentang Kami</h1>   
         </div>
     </div>
 

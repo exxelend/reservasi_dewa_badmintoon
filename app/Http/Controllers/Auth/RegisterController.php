@@ -72,6 +72,8 @@ class RegisterController extends Controller
             'role' => 'user',
         ]);
         
+      
+        
         return view('user/home');
     }
 }

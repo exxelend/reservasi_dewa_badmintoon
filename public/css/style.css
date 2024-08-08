@@ -442,3 +442,49 @@ img.animated.pulse {
   padding-right: 0;
   border-right: none;
 }
+
+/* Tambahkan ini ke file CSS Anda */
+.dark-theme {
+  background-color: #2e2e2e;
+  color: #d3d3d3;
+}
+
+.dark-theme .navbar, .dark-theme .footer, .dark-theme .container-fluid, .dark-theme .card, .dark-theme .modal-content {
+  background-color: #333;
+  color: #d3d3d3;
+}
+
+.dark-theme a {
+  color: #d3d3d3;
+}
+
+.dark-theme a:hover {
+  color: #ffffff;
+}
+
+.dark-theme .btn-primary, .dark-theme .btn-secondary {
+  background-color: #444;
+  border-color: #444;
+  color: #d3d3d3;
+}
+
+.dark-theme .form-control {
+  background-color: #444;
+  color: #d3d3d3;
+  border-color: #555;
+}
+
+.dark-theme .form-control::placeholder {
+  color: #999;
+}
+
+.dark-theme .input-group-text {
+  background-color: #444;
+  color: #d3d3d3;
+  border-color: #555;
+}
+
+.dark-theme .card-header, .dark-theme .card-body {
+  background-color: #333;
+  color: #d3d3d3;
+}

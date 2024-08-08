@@ -5610,6 +5610,7 @@ fieldset:disabled .btn {
         transform: rotate(360deg); /* rtl:ignore */
     }
 }
+
 .spinner-border {
     display: inline-block;
     width: 2rem;

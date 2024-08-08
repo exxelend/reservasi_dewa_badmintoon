@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('title', $event->name)
 
@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-lg-6 mb-4">
                 <div class="card shadow-sm">
-                    <img src="{{ asset('images/events/' . $event->image) }}" class="card-img-top event-image" alt="Event Image">
+                    <!-- <img src="{{ asset('images/events/' . $event->image) }}" class="card-img-top event-image" alt="Event Image"> -->
                     <div class="card-body">
                         <h5 class="card-title">{{ $event->name }}</h5>
                         <p class="card-text"><strong>Date:</strong> {{ $event->date }}</p>

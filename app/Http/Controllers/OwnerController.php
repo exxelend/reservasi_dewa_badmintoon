@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Pemesanan;
 use App\Models\Lapangan;
+use App\Models\User;
 
 class OwnerController extends Controller
 {
@@ -24,7 +25,11 @@ class OwnerController extends Controller
         $pemesanan = $query->get();
         $total_income = $query->sum('total_harga');
 
-        return view('owner.dashboard', compact('pemesanan', 'total_income'));
+        // Query for total users and total reservations
+        $totalUsers = User::count();
+        $totalPemesanan = Pemesanan::count();
+
+        return view('owner.dashboard', compact('pemesanan', 'total_income', 'totalUsers', 'totalPemesanan'));
     }
 
     public function nota($id)
@@ -34,3 +39,4 @@ class OwnerController extends Controller
         return view('admin.pemesanan.nota', compact(['pemesanan', 'lapangan']));
     }
 }
+

@@ -1,103 +1,116 @@
 @extends('layouts.admin')
+
 @section('content')
 
-<body>
-  <div class="main-container">
-    <div class="year-stats">
-      <div class="month-group">
-        <div class="bar h-100"></div>
-        <p class="month">Jan</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-50"></div>
-        <p class="month">Feb</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-75"></div>
-        <p class="month">Mar</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-25"></div>
-        <p class="month">Apr</p>
-      </div>
-      <div class="month-group selected">
-        <div class="bar h-100"></div>
-        <p class="month">May</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-50"></div>
-        <p class="month">Jun</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-75"></div>
-        <p class="month">Jul</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-25"></div>
-        <p class="month">Aug</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-50"></div>
-        <p class="month">Sep</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-75"></div>
-        <p class="month">Oct</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-25"></div>
-        <p class="month">Nov</p>
-      </div>
-      <div class="month-group">
-        <div class="bar h-100"></div>
-        <p class="month">Dez</p>
-      </div>
-    </div>
-
-    <div class="stats-info">
-      <div class="graph-container">
-        <div class="percent">
-          <svg viewBox="0 0 36 36" class="circular-chart">
-            <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
-      a 15.9155 15.9155 0 0 1 0 31.831
-      a 15.9155 15.9155 0 0 1 0 -31.831" />
-            <path class="circle" stroke-dasharray="85, 100" d="M18 2.0845
-      a 15.9155 15.9155 0 0 1 0 31.831
-      a 15.9155 15.9155 0 0 1 0 -31.831" />
-            <path class="circle" stroke-dasharray="60, 100" d="M18 2.0845
-      a 15.9155 15.9155 0 0 1 0 31.831
-      a 15.9155 15.9155 0 0 1 0 -31.831" />
-            <path class="circle" stroke-dasharray="30, 100" d="M18 2.0845
-      a 15.9155 15.9155 0 0 1 0 31.831
-      a 15.9155 15.9155 0 0 1 0 -31.831" />
-          </svg>
-        </div>
-        <p>Total data reservasi pertahun : 2075</p>
-      </div>
-
-      <div class="info">
-        <p>Data Reservasi Sukses<br /><span> & Data Pemasukan Uang Reservasi</span></p>
-        <p>Reservasi Sukses <span>100 Orang</span></p>
-        <p>Pemasukan Uang Reservasi <br /><span>Rp. 800.000</brspan></p>
-      </div>
-    </div>
-  </div>
-</body>
 <div class="container">
-  <div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
-      <div class="col-sm-6 col-xl-4">
-        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-          <i class="fas fa-users fa-3x text-primary"></i>
-          <div class="ms-3">
-            <h4 class="mb-2">Reservasi</h4>
-            <h6 class="mb-0">{{ $totalPemesanan }}</h6>
-          </div>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-6 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 equal-height">
+                    <i class="fas fa-users fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <h4 class="mb-2">Reservasi</h4>
+                        <h6 class="mb-0">{{ $totalPemesanan }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4 equal-height">
+                    <i class="fas fa-user-check fa-3x text-success"></i>
+                    <div class="ms-3">
+                        <h4 class="mb-2">Pengguna Terdaftar</h4>
+                        <h6 class="mb-0">{{ $totalUsers }}</h6>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="row g-4 mt-4">
+            <div class="col-sm-12 col-xl-6">
+                <h5>Reservasi per Bulan</h5> <!-- Keterangan di atas chart bulanan -->
+                <canvas id="monthlyChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-sm-12 col-xl-6">
+                <h5>Reservasi per Tahun</h5> <!-- Keterangan di atas chart tahunan -->
+                <canvas id="yearlyChart" width="400" height="400"></canvas>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-</div>
-</div>
+
+<style>
+  .equal-height {
+    height: 100%;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Data reservasi bulanan
+    var monthlyData = @json($monthlyReservations);
+    var monthlyLabels = [];
+    var monthlyValues = [];
+    for (var i = 1; i <= 12; i++) {
+        monthlyLabels.push(new Date(0, i - 1).toLocaleString('default', { month: 'short' }));
+        monthlyValues.push(monthlyData[i] || 0);
+    }
+
+    var monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+    var monthlyChart = new Chart(monthlyCtx, {
+        type: 'bar',
+        data: {
+            labels: monthlyLabels,
+            datasets: [{
+                label: 'Reservasi per Bulan',
+                data: monthlyValues,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            animation: false,
+            responsive: false,
+            maintainAspectRatio: false
+        }
+    });
+
+    // Data reservasi tahunan
+    var yearlyData = @json($yearlyReservations);
+    var yearlyLabels = Object.keys(yearlyData);
+    var yearlyValues = Object.values(yearlyData);
+
+    var yearlyCtx = document.getElementById('yearlyChart').getContext('2d');
+    var yearlyChart = new Chart(yearlyCtx, {
+        type: 'bar',
+        data: {
+            labels: yearlyLabels,
+            datasets: [{
+                label: 'Reservasi per Tahun',
+                data: yearlyValues,
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            animation: false,
+            responsive: false,
+            maintainAspectRatio: false
+        }
+    });
+});
+</script>
+
 @endsection

@@ -1,0 +1,28 @@
+/* Darker colors for the circular chart */
+.circular-chart .circle {
+    stroke: #333; /* Darker color for the chart stroke */
+    stroke-width: 2.8;
+    fill: none;
+    transition: stroke-dasharray 0.3s ease;
+  }
+  
+  /* Darker background and text color for the chart container */
+  .graph-container {
+    background-color: #222; /* Dark background for the container */
+    color: #fff; /* Light text color for better contrast */
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  /* Adjust the colors for the stats-info and bar chart */
+  .year-stats {
+    background-color: #333; /* Darker background for the stats area */
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .bar {
+    background-color: #555; /* Darker color for the bars */
+  }
+  

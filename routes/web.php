@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\EventController;
+// use App\Http\Controllers\Auth\EventController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\PanduanController;
@@ -47,8 +48,11 @@ Route::middleware(['guest'])->group(function () {
 });
 
 // Rute untuk event...
-Route::get('/events', [\App\Http\Controllers\Auth\EventController::class, 'index'])->name('events.index');
-Route::get('/events/{event}', [\App\Http\Controllers\Auth\EventController::class, 'show'])->name('events.show');
+Route::get('/events', [\App\Http\Controllers\EventController::class, 'index'])->name('events.index');
+Route::get('/events/create', [\App\Http\Controllers\EventController::class, 'create'])->name('events.create');
+// Route::get('/events/store', [\App\Http\Controllers\EventController::class, 'store'])->name('events.store');
+Route::get('/events/{event}', [\App\Http\Controllers\EventController::class, 'show'])->name('events.show');
+Route::resource('events', EventController::class);
 
 Route::middleware(['auth', 'role:owner'])->group(function () {Route::get('/owner-dashboard', [OwnerController::class, 'index'])->middleware('owner')->name('owner.dashboard');});
 Route::get('/owner-dashboard', [OwnerController::class, 'index'])->middleware('owner')->name('owner.dashboard');
@@ -57,6 +61,9 @@ Route::get('/owner-dashboard', [OwnerController::class, 'index'])->middleware('o
 Route::middleware(['auth', 'role:petugas'])->group(function () {
     Route::get('/petugas-dashboard', [PetugasController::class, 'index'])->middleware('petugas')->name('petugas.dashboard');
     Route::get('/petugas/pemesanan', [PetugasController::class, 'reservasi'])->name('petugas.index');
+    // Route::get('/petugas/pemesanan/create', [PetugasController::class, 'reservasi'])->name('petugas.create');
+    // Route::get('/petugas/pemesanan/create', [\App\Http\Controllers\EventController::class, 'index'])->name('events.index');
+
     
 });
 
@@ -70,57 +77,80 @@ Route::get('/kasir-dashboard', [KasirController::class, 'index'])->middleware('k
 });
 
  // Rute untuk admin...
-Route::middleware(['auth', 'role:admin'])->group(function () {
-Route::get('/dashboard_admin', [HomeController::class, 'index'])->name('dashboard_admin');
-Route::middleware(['auth', 'role:admin'])->group(function () {
-Route::get('/dashboard_admin', [DashboardController::class, 'index'])->name('dashboard_admin');
+Route::middleware(['auth', 'role:admin'])
+->group(function () 
+{
+    Route::get('/dashboard_admin', [HomeController::class, 'index'])->name('dashboard_admin');
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/dashboard_admin', [DashboardController::class, 'index'])->name('dashboard_admin');
 
-// routes/web.php
-Route::put('/admin/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])
-    ->name('admin.users.update')
-    ->middleware('role:admin');
-
-
-
-// Rute untuk bagian SEO
-// Contoh penggunaan routing yang bersih di Laravel
-Route::get('/artikel/{slug}', 'ArtikelController@show');
+    // routes/web.php
+    // Route::put('/admin/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.users.update')->middleware('role:admin');
 
 
-    Route::get('/lapangan', )->name('lapangan.index')->middleware('role:admin');
-    Route::get('/lapangan/create', [\App\Http\Controllers\Admin\LapanganController::class, 'create'])->middleware('role:admin');
-    Route::post('/lapangan/store', [\App\Http\Controllers\Admin\LapanganController::class,'store'])->middleware('role:admin');
-    Route::get('/lapangan/{id}/update', [\App\Http\Controllers\Admin\LapanganController::class, 'update'])->middleware('role:admin');
-    Route::put('/lapangan/{id}', [\App\Http\Controllers\Admin\LapanganController::class, 'edit'])->middleware('role:admin');
-    Route::get('/lapangan/{id}/delete', [\App\Http\Controllers\Admin\LapanganController::class, 'delete'])->middleware('role:admin');
+    // routes/web.php
+    Route::resource('admin/users', \App\Http\Controllers\Admin\UserController::class)
+        ->names([
+            'index' => 'admin.users.index',
+            'create' => 'admin.users.create',
+            'store' => 'admin.users.store',
+            'show' => 'admin.users.show',
+            'edit' => 'admin.users.edit',
+            'update' => 'admin.users.update',
+            'destroy' => 'admin.users.destroy',
+        ])
+        ->middleware('role:admin');
+
+    // Rute untuk bagian SEO
+    // Contoh penggunaan routing yang bersih di Laravel
+    // Route::get('/artikel/{slug}', 'ArtikelController@show');
+
+    // Route::resource('/lapangan', \App\Http\Controllers\Admin\LapanganController::class)
+    //     ->names([
+    //         'index' => 'lapangan.index',
+    //         'create' => 'lapangan.create',
+    //         'store' => 'lapangan.store',
+    //         'show' => 'lapangan.show',
+    //         'edit' => 'lapangan.edit',
+    //         'update' => 'lapangan.update',
+    //         'destroy' => 'lapangan.destroy',
+    //     ])
+    //     ->middleware('role:admin');     
+
+        Route::get('/lapangan', [\App\Http\Controllers\Admin\LapanganController::class, 'index'])->name('lapangan.index')->middleware('role:admin');
+        Route::get('/lapangan/create', [\App\Http\Controllers\Admin\LapanganController::class, 'create'])->middleware('role:admin');
+        Route::post('/lapangan/store', [\App\Http\Controllers\Admin\LapanganController::class,'store'])->middleware('role:admin');
+        Route::get('/lapangan/{id}/update', [\App\Http\Controllers\Admin\LapanganController::class, 'update'])->middleware('role:admin');
+        Route::put('/lapangan/{id}', [\App\Http\Controllers\Admin\LapanganController::class, 'edit'])->middleware('role:admin');
+        Route::get('/lapangan/{id}/delete', [\App\Http\Controllers\Admin\LapanganController::class, 'delete'])->middleware('role:admin');
+        
     
-   
+        
+        Route::get('/admin/member', [\App\Http\Controllers\Admin\MemberController::class, 'index'])->name('member.admin.index')->middleware('role:admin');
+        Route::get('/admin/member/create', [\App\Http\Controllers\Admin\MemberController::class, 'create'])->name('member.admin.create')->middleware('role:admin');
+        Route::post('/admin/member/store', [\App\Http\Controllers\Admin\MemberController::class,'store'])->name('member.admin.store')->middleware('role:admin');
+        Route::get('/admin/member/{id}/update', [\App\Http\Controllers\Admin\MemberController::class, 'update'])->middleware('role:admin');
+        Route::put('/admin/member/{id}', [\App\Http\Controllers\Admin\MemberController::class, 'edit']);
+        Route::get('/admin/member/{id}/delete', [\App\Http\Controllers\Admin\MemberController::class, 'delete'])->middleware('role:admin');
+        Route::get('/admin/dataMember', [\App\Http\Controllers\Admin\MemberController::class, 'cetak'])->name('member.admin.cetak')->middleware('role:admin');
+        Route::get('/admin/member/{id}/nota', [\App\Http\Controllers\Admin\MemberController::class, 'nota'])->middleware('role:admin');
     
-    Route::get('/admin/member', [\App\Http\Controllers\Admin\MemberController::class, 'index'])->name('member.admin.index')->middleware('role:admin');
-    Route::get('/admin/member/create', [\App\Http\Controllers\Admin\MemberController::class, 'create'])->name('member.admin.create')->middleware('role:admin');
-    Route::post('/admin/member/store', [\App\Http\Controllers\Admin\MemberController::class,'store'])->name('member.admin.store')->middleware('role:admin');
-    Route::get('/admin/member/{id}/update', [\App\Http\Controllers\Admin\MemberController::class, 'update'])->middleware('role:admin');
-    Route::put('/admin/member/{id}', [\App\Http\Controllers\Admin\MemberController::class, 'edit']);
-    Route::get('/admin/member/{id}/delete', [\App\Http\Controllers\Admin\MemberController::class, 'delete'])->middleware('role:admin');
-    Route::get('/admin/dataMember', [\App\Http\Controllers\Admin\MemberController::class, 'cetak'])->name('member.admin.cetak')->middleware('role:admin');
-    Route::get('/admin/member/{id}/nota', [\App\Http\Controllers\Admin\MemberController::class, 'nota'])->middleware('role:admin');
-   
-    Route::get('/admin/pemesanan', [\App\Http\Controllers\Admin\PemesananController::class, 'index'])->name('pemesanan.admin.index')->middleware('role:admin');
-    Route::get('/admin/pemesanan/create', [\App\Http\Controllers\Admin\PemesananController::class, 'create'])->name('pemesanan.admin.create')->middleware('role:admin');
-    Route::post('/admin/pemesanan/store', [\App\Http\Controllers\Admin\PemesananController::class,'store'])->name('pemesanan.admin.store')->middleware('role:admin');
-    Route::get('/admin/pemesanan/{id}/update', [\App\Http\Controllers\Admin\PemesananController::class, 'update'])->middleware('role:admin');
-    Route::put('/admin/pemesanan/{id}', [\App\Http\Controllers\Admin\PemesananController::class, 'edit'])->middleware('role:admin');
-    Route::get('/admin/pemesanan/{id}/delete', [\App\Http\Controllers\Admin\PemesananController::class, 'delete'])->middleware('role:admin');
-    Route::post('/admin/cetakPemesanan', [\App\Http\Controllers\Admin\PemesananController::class, 'cetak'])->name('cetak')->middleware('role:admin');
-    Route::get('/admin/pemesanan/{id}/nota', [\App\Http\Controllers\Admin\PemesananController::class, 'nota'])->middleware('role:admin');
+        Route::get('/admin/pemesanan', [\App\Http\Controllers\Admin\PemesananController::class, 'index'])->name('pemesanan.admin.index')->middleware('role:admin');
+        Route::get('/admin/pemesanan/create', [\App\Http\Controllers\Admin\PemesananController::class, 'create'])->name('pemesanan.admin.create')->middleware('role:admin');
+        Route::post('/admin/pemesanan/store', [\App\Http\Controllers\Admin\PemesananController::class,'store'])->name('pemesanan.admin.store')->middleware('role:admin');
+        Route::get('/admin/pemesanan/{id}/update', [\App\Http\Controllers\Admin\PemesananController::class, 'update'])->middleware('role:admin');
+        Route::put('/admin/pemesanan/{id}', [\App\Http\Controllers\Admin\PemesananController::class, 'edit'])->middleware('role:admin');
+        Route::get('/admin/pemesanan/{id}/delete', [\App\Http\Controllers\Admin\PemesananController::class, 'delete'])->middleware('role:admin');
+        Route::post('/admin/cetakPemesanan', [\App\Http\Controllers\Admin\PemesananController::class, 'cetak'])->name('cetak')->middleware('role:admin');
+        Route::get('/admin/pemesanan/{id}/nota', [\App\Http\Controllers\Admin\PemesananController::class, 'nota'])->middleware('role:admin');
 
-    Route::get('/panduan', [\App\Http\Controllers\Admin\PanduanController::class, 'index'])->name('panduan.index')->middleware('role:admin');
-    Route::get('/panduan/create', [\App\Http\Controllers\Admin\PanduanController::class, 'create'])->middleware('role:admin');
-    Route::post('/panduan/store', [\App\Http\Controllers\Admin\PanduanController::class,'store'])->middleware('role:admin');
-    Route::get('/panduan/{id}/update', [\App\Http\Controllers\Admin\PanduanController::class, 'update'])->middleware('role:admin');
-    Route::put('/panduan/{id}', [\App\Http\Controllers\Admin\PanduanController::class, 'edit'])->middleware('role:admin');
-    Route::get('/panduan/{id}/delete', [\App\Http\Controllers\Admin\PanduanController::class, 'delete'])->middleware('role:admin');
-});
+        Route::get('/panduan', [\App\Http\Controllers\Admin\PanduanController::class, 'index'])->name('panduan.index')->middleware('role:admin');
+        Route::get('/panduan/create', [\App\Http\Controllers\Admin\PanduanController::class, 'create'])->middleware('role:admin');
+        Route::post('/panduan/store', [\App\Http\Controllers\Admin\PanduanController::class,'store'])->middleware('role:admin');
+        Route::get('/panduan/{id}/update', [\App\Http\Controllers\Admin\PanduanController::class, 'update'])->middleware('role:admin');
+        Route::put('/panduan/{id}', [\App\Http\Controllers\Admin\PanduanController::class, 'edit'])->middleware('role:admin');
+        Route::get('/panduan/{id}/delete', [\App\Http\Controllers\Admin\PanduanController::class, 'delete'])->middleware('role:admin');
+    });
 });
 
 // Rute untuk dashboard

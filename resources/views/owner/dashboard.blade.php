@@ -4,6 +4,24 @@
 <div class="container">
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
+            <div class="col-sm-6 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fas fa-users fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <h4 class="mb-2">Total Pengguna</h4>
+                        <h5 class="mb-0">{{ $totalUsers }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-4">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fas fa-calendar-check fa-3x text-success"></i>
+                    <div class="ms-3">
+                        <h4 class="mb-2">Total Reservasi</h4>
+                        <h5 class="mb-0">{{ $totalPemesanan }}</h5>
+                    </div>
+                </div>
+            </div>
             <div class="col-12">
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fas fa-users fa-3x text-primary"></i>
@@ -14,15 +32,16 @@
                                 <div class="col-md-4">
                                     <select name="month" class="form-control">
                                         <option value="">Pilih Bulan</option>
-                                        @for ($i = 1; $i <= 12; $i++) <option value="{{ $i }}">{{ \Carbon\Carbon::create()->month($i)->translatedFormat('F') }}</option>
-                                            @endfor
+                                        @for ($i = 1; $i <= 12; $i++)
+                                            <option value="{{ $i }}">{{ \Carbon\Carbon::create()->month($i)->translatedFormat('F') }}</option>
+                                        @endfor
                                     </select>
                                 </div>
                                 <div class="col-md-4">
                                     <select name="year" class="form-control">
                                         <option value="">Pilih Tahun</option>
                                         @for ($i = \Carbon\Carbon::now()->year; $i >= 2000; $i--)
-                                        <option value="{{ $i }}">{{ $i }}</option>
+                                            <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
                                 </div>

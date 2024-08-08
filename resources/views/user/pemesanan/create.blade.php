@@ -7,7 +7,7 @@
 </div>
 <div class="container my-5">
     @if (session()->has('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-message">
+    <div class="alert alert-{{ session()->get('alert-type') }} alert-dismissible fade show" role="alert" id="alert-message">
         {{ session()->get('error') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -103,4 +103,7 @@
     });
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- notifikasi toastr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 @endsection
